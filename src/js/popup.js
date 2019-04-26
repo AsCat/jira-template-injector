@@ -3,10 +3,12 @@
 
 /* global chrome, browser, saveAs, Materialize */
 
+console.log('You can email me: wengyanghui@foxmail.com');
+
 var StorageID = 'Jira-Template-Injector';
 var disabledOptionToast =
     '<span>Option is currently disabled. See ' +
-    '<a class="newTabLinks" href="https://github.com/rdbrck/jira-description-extension">Help?</a>' +
+    '<a class="newTabLinks" href="https://github.com/AsCat/jira-template-injector">Help?</a>' +
     ' for details</span>';
 
 var browserType = 'Chrome'; // eslint-disable-line no-unused-vars
@@ -245,6 +247,15 @@ function limitAccess (callback = false) {
 }
 
 $(document).ready(function () {
+    // console.log($('#tabs'))
+    // $('#tabs').tabs();
+    // $('.widget input[type=submit], .widget a, .widget button').button();
+    // $('#accordion').accordion({
+    //     collapsible: true,
+    //     heightStyle: 'content'
+    // });
+    // console.log('ddddddddddddd');
+
     // set the display:block of the content in a timeout to avoid resizing of popup
     setTimeout(function () {
         const style = document.querySelector('body').style;
@@ -272,7 +283,7 @@ $(document).ready(function () {
                 if (response.message) {
                     Materialize.toast(response.message, 2000, 'toastNotification');
                 } else {
-                    Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                    Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                 }
             }
         });
@@ -306,7 +317,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotifcation');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotifcation');
                     }
                 }
             });
@@ -330,7 +341,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -361,7 +372,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -391,7 +402,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -415,7 +426,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -438,7 +449,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -448,20 +459,22 @@ $(document).ready(function () {
     });
 
     $('#rate').click(function () {
-        chrome.runtime.sendMessage({
-            JDTIfunction: 'setToggleStatus',
-            toggleType: 'rateClicked',
-            toggleInput: true
-        }, function (response) {
-            window.open('https://chrome.google.com/webstore/detail/jira-template-injector/' + chrome.runtime.id + '/reviews?hl=en', '_blank'); // Open extension user reviews page
-            if (response.status !== 'success') {
-                if (response.message) {
-                    Materialize.toast(response.message, 2000, 'toastNotification');
-                } else {
-                    Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
-                }
-            }
-        });
+        // chrome.runtime.sendMessage({
+        //     JDTIfunction: 'setToggleStatus',
+        //     toggleType: 'rateClicked',
+        //     toggleInput: true
+        // }, function (response) {
+        //     // window.open('https://chrome.google.com/webstore/detail/jira-template-injector/' + chrome.runtime.id + '/reviews?hl=en', '_blank'); // Open extension user reviews page
+        //     window.open('mailto:wengyanghui@foxmail.com');
+        //     if (response.status !== 'success') {
+        //         if (response.message) {
+        //             Materialize.toast(response.message, 2000, 'toastNotification');
+        //         } else {
+        //             Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
+        //         }
+        //     }
+        // });
+        window.open('mailto:wengyanghui@foxmail.com');
     });
 
     $('#upload').click(function () {
@@ -488,7 +501,7 @@ $(document).ready(function () {
                             if (response.message) {
                                 Materialize.toast(response.message, 2000, 'toastNotification');
                             } else {
-                                Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                                Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                             }
                         }
                     });
@@ -507,12 +520,12 @@ $(document).ready(function () {
             }, function (response) {
                 if (response.status === 'success') {
                     location.reload();
-                    Materialize.toast('Templates successfully loaded from URL', 2000, 'toastNotification');
+                    Materialize.toast('成功从URL加载模板', 2000, 'toastNotification');
                 } else {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -528,13 +541,13 @@ $(document).ready(function () {
             }, function (response) {
                 if (response.status === 'success') {
                     location.reload();
-                    Materialize.toast('All templates deleted', 2000, 'toastNotification');
+                    Materialize.toast('已删除所有模板', 2000, 'toastNotification');
                 } else {
                     $('#templateEditor').empty();
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -568,12 +581,12 @@ $(document).ready(function () {
                 if (response.status === 'success') {
                     $('#addTemplateModal').closeModal();
                     loadTemplateEditor(response.data);
-                    Materialize.toast('Template successfully added', 2000, 'toastNotification');
+                    Materialize.toast('模板添加成功', 2000, 'toastNotification');
                 } else {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -584,7 +597,7 @@ $(document).ready(function () {
 
     $('#addDefaultDropdownButton').click(function () {
         if ($('#addDefaultDropdownButton').hasClass('emptyDropdown')) {
-            Materialize.toast('All default templates have already been added', 2000, 'toastNotification');
+            Materialize.toast('所有的默认模板都已经被添加', 2000, 'toastNotification');
         } else if ($('#addDefaultDropdownButton').hasClass('disabled')) {
             Materialize.toast(disabledOptionToast, 2000, 'toastNotification');
         } else {
@@ -612,7 +625,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -663,7 +676,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -691,7 +704,7 @@ $(document).ready(function () {
                     if (response.message) {
                         Materialize.toast(response.message, 2000, 'toastNotification');
                     } else {
-                        Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                        Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                     }
                 }
             });
@@ -724,7 +737,7 @@ $(document).ready(function () {
                 if (response.message) {
                     Materialize.toast(response.message, 2000, 'toastNotification');
                 } else {
-                    Materialize.toast('Something went wrong. Please try again.', 2000, 'toastNotification');
+                    Materialize.toast('出现错误，请重试', 2000, 'toastNotification');
                 }
             }
         });

@@ -2,7 +2,6 @@
 /* https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE */
 
 /* global chrome, browser */
-
 var browserType = 'Chrome'; // eslint-disable-line no-unused-vars
 if (navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Edge') !== -1) {
     chrome = browser; // eslint-disable-line no-native-reassign
@@ -17,7 +16,7 @@ if (navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf
 
 var StorageID = 'Jira-Template-Injector';
 var DefaultDomainList = [
-    {'name': 'atlassian.net'}
+    {'name': 'jira.netease.com'}
 ];
 var DefaultIDList = [
     {'name': 'description'}

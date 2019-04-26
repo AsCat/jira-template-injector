@@ -6,61 +6,84 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
 -->
 
 <html>
-    <head>
-        <title>Jira Template Injector</title>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- Javascript -->
-        <script type="text/javascript" src="../lib/jquery/jquery-2.2.3.js"></script>
-        <script type="text/javascript" src="../lib/materialize/materialize.js"></script>
-        <script type="text/javascript" src="../lib/filesaver/FileSaver.js"></script>
-        <script type="text/javascript" src="../js/utils.js"></script>
-        <script type="text/javascript" src="../js/popup.js"></script>
-        <!-- CSS -->
-        <link type="text/css" rel="stylesheet" href="../lib/materialize/materialize.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="../css/popup.css">
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Jira Template Injector</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Javascript -->
+    <script type="text/javascript" src="../lib/jquery/jquery-2.2.3.js"></script>
+    <script type="text/javascript" src="../lib/materialize/materialize.js"></script>
+    <script type="text/javascript" src="../lib/filesaver/FileSaver.js"></script>
+    <script type="text/javascript" src="../js/utils.js"></script>
+    <script type="text/javascript" src="../js/popup.js"></script>
+    <!-- CSS -->
+    <link type="text/css" rel="stylesheet" href="../lib/materialize/materialize.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../css/popup.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
-    <body>
-        <div class="navbar-fixed">
-            <nav>
-                <div class="nav-wrapper">
-                    <div class="brand-logo center">
-                        <p id="mainTitle">
-                            <a class="newTabLinks" href="https://rdbrck.com/">
-                                <img src="../images/JTI-128.png" id="logoIcon">
-                            </a>
-                            <a class="newTabLinks" href="https://github.com/rdbrck/jira-description-extension">
-                                Jira Template Injector
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <div id="help" class="row center-align">
-                    <a class="newTabLinks" href="https://github.com/rdbrck/jira-description-extension">Help?</a>
-                </div>
-            </nav>
+<body>
+
+
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <div class="brand-logo center">
+                <p id="mainTitle">
+                    <a class="newTabLinks" href="http://jira.netease.com/">
+                        <img src="../images/163-128.png" id="logoIcon">
+                    </a>
+                    <a class="newTabLinks" style="font-size: 18px" href="http://jira.netease.com/">
+                        NETEASE JIRA 助手
+                    </a>
+                </p>
+            </div>
         </div>
+        <!--                <div id="help" class="row center-align">-->
+        <!--                    <a class="newTabLinks" href="https://github.com/AsCat/jira-template-injector">使用帮助?</a>-->
+        <!--                </div>-->
+    </nav>
+</div>
 
+
+<div class="row">
+<!--    <div class="col s12">-->
+<!--        <ul class="tabs">-->
+<!--            <li class="tab col s3"><a class="active" href="#test1">工具导航</a></li>-->
+<!--            <li class="tab col s3"><a href="#test2">JIRA助手</a></li>-->
+<!--            <li class="tab col s3"><a href="#test3">帮助&关于</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+    <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="#test1">新手导航</a></li>
+            <li class="tab"><a class="active" href="#test2">JIRA助手</a></li>
+            <li class="tab"><a href="#test3">帮助&关于</a></li>
+        </ul>
+    </div>
+    <div id="test1" class="col s12">
+        <ul class="collection with-header">
+<!--            <li class="collection-header"><h5>新手导航</h5></li>-->
+            <li class="collection-item"><div>轻舟Jira管理规范<a href="http://doc.hz.netease.com/pages/viewpage.action?pageId=121603598" target="_blank" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            <li class="collection-item"><div>JIRA<a href="http://jira.netease.com/" target="_blank" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            <li class="collection-item"><div>VPN获取<a href="http://cloud-i.netease.com/vpn/" target="_blank" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+            <li class="collection-item"><div>IT服务中心<a href="http://it.netease.com" target="_blank" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        </ul>
+    </div>
+    <div id="test2" class="col s12">
         <main>
             <div class="container">
-                <div id="rateSection">
-                    <div class="section">
-                        <div class="row text-center">
-                            <a id="rate" class="waves-effect waves-light btn red"><i class="material-icons left">grade</i>Rate It Now !</a>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                </div>
+
                 <div class="section">
                     <div class="row">
                         <div class="col s8 valign-wrapper left-align">
-                            <h6> Reload default Templates:</h6>
+                            <h6> 重置默认模板:</h6>
                         </div>
                         <div class="col s4 right-align">
-                            <a id="reset" class="btn-floating btn-jti tooltipped" data-position="left" data-delay="50" data-tooltip="Reload Templates">
+                            <a id="reset" class="btn-floating btn-jti tooltipped" data-position="left"
+                               data-delay="50" data-tooltip="重置模板">
                                 <i class="material-icons">replay</i>
                             </a>
                         </div>
@@ -70,13 +93,14 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <div class="section">
                     <div class="row">
                         <div class="col s5 valign-wrapper">
-                            <h6 class="valign-wrapper"> Load JSON from URL:</h6>
+                            <h6 class="valign-wrapper"> 在线导入:</h6>
                         </div>
                         <div class="col s5">
                             <input id="jsonURLInput" type="text" name="url" placeholder="URL to JSON file">
                         </div>
                         <div class="col s2 right-align">
-                            <a id="download" class="btn-floating btn-jti tooltipped" data-position="left" data-delay="50" data-tooltip="Download Templates">
+                            <a id="download" class="btn-floating btn-jti tooltipped" data-position="left"
+                               data-delay="50" data-tooltip="下载模板">
                                 <i class="material-icons">cloud_download</i>
                             </a>
                         </div>
@@ -86,13 +110,14 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <div class="section">
                     <div class="row">
                         <div class="col s3 valign-wrapper">
-                            <h6 class="valign-wrapper"> Select file:</h6>
+                            <h6 class="valign-wrapper"> 本地导入:</h6>
                         </div>
                         <div class="col s7">
                             <form action="#">
                                 <div class="file-field input-field">
-                                    <div id="fileSelectorButton" class="btn btn-jti">
-                                        <span>File</span>
+                                    <div id="fileSelectorButton" class="btn btn-jti"
+                                         style="height: 30px;line-height: 30px;cursor: pointer;">
+                                        <span>浏览</span>
                                         <input type="file" id="fileSelector">
                                     </div>
                                     <div class="file-path-wrapper">
@@ -102,7 +127,8 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                             </form>
                         </div>
                         <div class="col s2 right-align">
-                            <a id="upload" class="btn-floating btn-jti tooltipped" data-position="left" data-delay="50" data-tooltip="Upload File">
+                            <a id="upload" class="btn-floating btn-jti tooltipped" data-position="left"
+                               data-delay="50" data-tooltip="上传文件">
                                 <i class="material-icons">file_upload</i>
                             </a>
                         </div>
@@ -112,10 +138,11 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <div class="section">
                     <div class="row">
                         <div class="col s8 valign-wrapper">
-                            <h6 class="left-align"> Clear all Templates:</h6>
+                            <h6 class="left-align"> 清除所有模板:</h6>
                         </div>
                         <div class="col s4 right-align">
-                            <a id="clear" class="btn-floating btn-jti tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all templates">
+                            <a id="clear" class="btn-floating btn-jti tooltipped" data-position="left"
+                               data-delay="50" data-tooltip="删除所有模板">
                                 <i class="material-icons">delete</i>
                             </a>
                         </div>
@@ -125,24 +152,25 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <div class="section">
                     <div class="row">
                         <div class="col s8 valign-wrapper">
-                            <h6 class="left-align"> Manage Custom Settings:</h6>
+                            <h6 class="left-align"> 管理自定义设置:</h6>
                         </div>
                         <div class="col s4 right-align">
-                            <a id="customSettings" class="btn-floating btn-jti tooltipped" data-position="left" data-delay="50" data-tooltip="Manage Settings">
+                            <a id="customSettings" class="btn-floating btn-jti tooltipped" data-position="left"
+                               data-delay="50" data-tooltip="管理设置">
                                 <i class="material-icons">format_list_bulleted</i>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="divider"></div>
-                
+
                 <div class="section">
                     <ul class="collapsible popout" data-collapsible="accordion" id="templateEditor">
                     </ul>
                 </div>
                 <div class="row">
-                    <div class="col s6 offset-s3 valign-wrapper">
-                        <a id="export" class="btn btn-jti ">Export Templates</a>
+                    <div class="col s6 offset-s3 valign-wrapper" style="margin-left: 10px">
+                        <a id="export" class="btn btn-jti ">导出模板</a>
                     </div>
                 </div>
             </div>
@@ -152,23 +180,24 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <div class="modal-content">
                     <div class="row">
                         <div class="col s12">
-                            <h5 id="addTemplateTitle">Add Default or Custom Template</h5>
+                            <h5 id="addTemplateTitle">添加默认或者自定义模板</h5>
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <label class="addTemplateLabel">Custom:</label>
+                    <label class="addTemplateLabel">自定义模板:</label>
                     <div class="row">
                         <div class="col s2 valign-wrapper zpr">
-                            <h6>Name:</h6>
+                            <h6>名称:</h6>
                         </div>
                         <div class="col s4 zpl">
-                            <input id="customTemplateName" type="text" name="customName" placeholder="BUG TEMPLATE" >
+                            <input id="customTemplateName" type="text" name="customName" placeholder="BUG 模板">
                         </div>
                         <div class="col s2 valign-wrapper zpr zpl text-center">
-                            <h6>Issue Type Field:</h6>
+                            <h6>工单类型:</h6>
                         </div>
                         <div class="col s3">
-                            <input id="customTemplateIssueTypeField" type="text" name="issueTypeField" placeholder="Bug" >
+                            <input id="customTemplateIssueTypeField" type="text" name="issueTypeField"
+                                   placeholder="Bug">
                         </div>
                         <div class="col s1 right-align">
                             <a id="addCustomTemplate" class="btn-floating btn-jti">
@@ -179,26 +208,28 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                     <div class="invisible-divider"></div>
                     <div class="row">
                         <div class="col s2 valign-wrapper zpr">
-                            <h6>Projects:</h6>
+                            <h6>项目:</h6>
                         </div>
                         <div class="col s10 zpl">
-                            <input id="customTemplateProjectsField" type="text" name="projectsField" placeholder="AIR, JIR (leave blank for all projects)" >
+                            <input id="customTemplateProjectsField" type="text" name="projectsField"
+                                   placeholder="CLDNSF, CLDNCE (不填则匹配所有项目)">
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <label class="addTemplateLabel">Default:</label>
+                    <label class="addTemplateLabel">默认:</label>
                     <div class="row" id="addDefaultDropdownRow">
                         <div class="col s7">
                             <!-- Dropdown Trigger -->
                             <a class="dropdown-button btn btn-jti" id="addDefaultDropdownButton" href="#">
                                 <i class="material-icons left">expand_more</i>
-                                Default Templates
+                                默认模板
                             </a>
                         </div>
                         <div class="col s5 valign-wrapper">
                             <p>
-                                <input type="checkbox" class="filled-in disabled btn-jti" id="loadDefault" checked="checked" />
-                                <label for="loadDefault">Load default text</label>
+                                <input type="checkbox" class="filled-in disabled btn-jti" id="loadDefault"
+                                       checked="checked"/>
+                                <label for="loadDefault">加载默认内容</label>
                             </p>
                         </div>
                     </div>
@@ -217,12 +248,13 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <!-- Back button -->
                 <div class="row valign-wrapper">
                     <div class="col">
-                        <a id="customSettingsBackButton" class="btn-floating btn-jti tooltipped center-align" data-position="right" data-delay="50" data-tooltip="Back">
+                        <a id="customSettingsBackButton" class="btn-floating btn-jti tooltipped center-align"
+                           data-position="right" data-delay="50" data-tooltip="返回">
                             <i class="material-icons">arrow_back</i>
                         </a>
                     </div>
                     <div class="col center-align">
-                        <div color="black" class="center-align custom-label">Manage Custom Settings</div>
+                        <div color="black" class="center-align custom-label">管理自定义设置</div>
                     </div>
                 </div>
 
@@ -231,25 +263,27 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
                 <!-- Custom Domain section -->
                 <div class="row valign-wrapper">
                     <div class="col">
-                        <a id="clearCustomDomains" class="btn-floating btn-jti tooltipped center-align custom-Domain-ui" data-position="right" data-delay="50" data-tooltip="Clear All Domains">
+                        <a id="clearCustomDomains" class="btn-floating btn-jti tooltipped center-align custom-Domain-ui"
+                           data-position="right" data-delay="50" data-tooltip="清空所有域名">
                             <i class="material-icons">delete</i>
                         </a>
                     </div>
                     <div class="col center-align">
-                        <div color="black" class="center-align custom-label">Custom Domains</div>
+                        <div color="black" class="center-align custom-label">自定义域名</div>
                     </div>
                 </div>
 
                 <div class="section">
                     <div class="row">
                         <div class="col s5 valign-wrapper">
-                            <h6> Add Custom Domain:</h6>
+                            <h6> 添加域名:</h6>
                         </div>
                         <div class="col s5">
                             <input id="customDomainInput" type="text" name="url" placeholder="Custom Domain URL">
                         </div>
                         <div class="col s2 right-align">
-                            <a id="customDomainInputButton" class="btn-floating btn-jti tooltipped custom-Domain-ui" data-position="left" data-delay="50" data-tooltip="Add Domain">
+                            <a id="customDomainInputButton" class="btn-floating btn-jti tooltipped custom-Domain-ui"
+                               data-position="left" data-delay="50" data-tooltip="添加域名">
                                 <i class="material-icons">add</i>
                             </a>
                         </div>
@@ -264,39 +298,63 @@ https://github.com/rdbrck/jira-description-extension/blob/master/LICENSE
 
                 <!-- Custom Input ID section -->
                 <div class="row valign-wrapper">
-                        <div class="col">
-                            <a id="clearCustomIDs" class="btn-floating btn-jti tooltipped center-align custom-ID-ui" data-position="right" data-delay="50" data-tooltip="Clear All IDs">
-                                <i class="material-icons">delete</i>
+                    <div class="col">
+                        <a id="clearCustomIDs" class="btn-floating btn-jti tooltipped center-align custom-ID-ui"
+                           data-position="right" data-delay="50" data-tooltip="清空所有ID">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                    <div class="col center-align">
+                        <div color="black" class="center-align custom-label">自定义输入框ID</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="row">
+                        <div class="col s5 valign-wrapper">
+                            <h6> 添加输入框ID:</h6>
+                        </div>
+                        <div class="col s5">
+                            <input id="customIDInput" type="text" name="url" placeholder="Custom Input ID">
+                        </div>
+                        <div class="col s2 right-align">
+                            <a id="customIDInputButton" class="btn-floating btn-jti tooltipped custom-ID-ui"
+                               data-position="left" data-delay="50" data-tooltip="添加ID">
+                                <i class="material-icons">add</i>
                             </a>
                         </div>
-                        <div class="col center-align">
-                            <div color="black" class="center-align custom-label">Custom Input IDs</div>
-                        </div>
                     </div>
-    
-                    <div class="section">
-                        <div class="row">
-                            <div class="col s5 valign-wrapper">
-                                <h6> Add Custom Input IDs:</h6>
-                            </div>
-                            <div class="col s5">
-                                <input id="customIDInput" type="text" name="url" placeholder="Custom Input ID">
-                            </div>
-                            <div class="col s2 right-align">
-                                <a id="customIDInputButton" class="btn-floating btn-jti tooltipped custom-ID-ui" data-position="left" data-delay="50" data-tooltip="Add ID">
-                                    <i class="material-icons">add</i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider spaced"></div>
-                    <!-- List of custom input IDs -->
-                    <ul class="collection" id="customIDsList">
-                    </ul>
+                </div>
+                <div class="divider spaced"></div>
+                <!-- List of custom input IDs -->
+                <ul class="collection" id="customIDsList">
+                </ul>
             </div>
         </div>
 
         <!-- Need this to be able to grab the sandbox window to compile the edit templates -->
         <iframe id="sandbox_window" src="sandbox.html" hidden></iframe>
-    </body>
+    </div>
+    <div id="test3" class="col s12">
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">JIRA Tool v1.2</span>
+                        <p>有事做 有所期待 生活就是美好的.</p>
+                        <p style="font-size: 12px;color: #a59da6">小技巧： 在描述里输出ctrl+~可以快速选中修改内容</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="mailto:wengyanghui@foxmial.com?Subject=JIRA助手" target="_blank" >wengyanghui@foxmail.com</a>
+                    </div>
+<!--                    <div style="height: 20px" class="card-action">-->
+<!--                        <a style="font-size: 12px">提示： 在描述里输出ctrl+~可以快速选中修改内容</a>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>

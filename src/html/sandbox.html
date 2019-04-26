@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <script src="../lib/handlebars/handlebars-1.0.0.beta.6.js"></script>
     </head>
     <body>
@@ -8,14 +9,14 @@
             <div class="row">
                 <div class="col s8 valign-wrapper">
                     {{#if templates}}
-                        <h6 id="templateEditorTitle">Templates:</h6>
+                        <h6 id="templateEditorTitle">模板:</h6>
                     {{else}}
-                        <h6 id="templateEditorTitle">No templates are currently loaded</h6>
+                        <h6 id="templateEditorTitle">当前未加载任何模板</h6>
                     {{/if}}
                 </div>
                 <div class="col s4 right-align">
                     <!-- Modal Trigger -->
-                    <a id="add" class="btn-floating btn-jti modal-trigger" data-position="left" data-delay="50" data-toggle="tooltip" data-tooltip="Add a Template">
+                    <a id="add" class="btn-floating btn-jti modal-trigger" data-position="left" data-delay="50" data-toggle="tooltip" data-tooltip="创建新模板">
                         <i class="material-icons">add</i>
                     </a>
                 </div>
@@ -31,31 +32,31 @@
                             <div class="invisible-divider"></div>
                             <div class="row">
                                 <div class="col s2 valign-wrapper zpr">
-                                    <h6>Name:</h6>
+                                    <h6>名称:</h6>
                                 </div>
                                 <div class="col s5 zpl">
-                                    <input type="text" name="nameField" placeholder="BUG TEMPLATE" value="{{ this.name }}" >
+                                    <input type="text" name="nameField" placeholder="任务 模板" value="{{ this.name }}" >
                                 </div>
                                 <div class="col s2 valign-wrapper zpr zpl text-center">
-                                    <h6>Issue Type Field:</h6>
+                                    <h6>工单类型:</h6>
                                 </div>
                                 <div class="col s3">
-                                    <input type="text" name="issueTypeField" placeholder="Bug" value="{{ this.[issuetype-field] }}" >
+                                    <input type="text" name="issueTypeField" placeholder="任务" value="{{ this.[issuetype-field] }}" >
                                 </div>
                             </div>
                             <div class="invisible-divider"></div>
                             <div class="row">
                                 <div class="col s2 valign-wrapper zpr">
-                                    <h6>Projects:</h6>
+                                    <h6>项目:</h6>
                                 </div>
                                 <div class="col s10">
-                                    <input type="text" name="projectsField" placeholder="AIR, JIR (leave blank for all projects)" value="{{ this.[projects-field] }}" >
+                                    <input type="text" name="projectsField" placeholder="CLDNSF, CLDNCE (不填则匹配所有项目)" value="{{ this.[projects-field] }}" >
                                 </div>
                             </div>
                             <div class="invisible-divider"></div>
                             <div class="row auto-height">
                                 <div class="col s2 valign-wrapper zpr">
-                                    <h6>Text:</h6>
+                                    <h6>内容:</h6>
                                 </div>
                                 <div class="col s10 zpl">
                                     <textarea class="materialize-textarea" name="textField" placeholder="*Summary*\n<TI>Enter summary of the problem here.</TI>">{{ this.text }}</textarea>
@@ -86,7 +87,7 @@
                     <li class="collection-item container custom-domain-collection">
                         <div class="row valign-wrapper remove-margin">
                             <div class="col s10 left-align custom-label">
-                                {{ this.name }} 
+                                {{ this.name }}
                             </div>
                             <div class="col s2">
                             </div>
@@ -99,7 +100,7 @@
                                 {{ this.name }}
                             </div>
                             <div class="col s2">
-                                <a class="btn-floating btn-jti" data-position="left" data-delay="50" data-toggle="tooltip" data-tooltip="Remove {{../../classAddition}}"> 
+                                <a class="btn-floating btn-jti" data-position="left" data-delay="50" data-toggle="tooltip" data-tooltip="Remove {{../../classAddition}}">
                                     <i id={{this.id}} class="custom-{{../../classAddition}}-remove-button custom-{{../../classAddition}}-ui material-icons">delete</i>
                                 </a>
                             </div>

@@ -3,10 +3,16 @@
 
 /* global chrome, browser */
 
-var StorageID = 'Jira-Template-Injector';
-var inputIDs = [];
+const StorageID = 'Jira-Template-Injector';
+const inputIDs = [];
+let labelObserver = null;
+let selectedType = null;
+let selectedLabel = [];
+let lastDescriptionElement = null;
+// const labels = ['QA测试', '开发自测-输出用例', '开发自测-输出用例+自动化', '开发自测-不输出用例'];
+let lastProcessTime = 0;
 
-var browserType = 'Chrome'; // eslint-disable-line no-unused-vars
+let browserType = 'Chrome'; // eslint-disable-line no-unused-vars
 if (navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Edge') !== -1) {
     chrome = browser; // eslint-disable-line no-native-reassign
     chrome.storage.sync = browser.storage.local;
@@ -25,14 +31,14 @@ chrome.runtime.sendMessage({JDTIfunction: 'getInputIDs'}, function (response) {
     });
 
     $(document).on('click', `#${inputIDs.join(', #')}`, function (inputID) {
-        var text = $(this).val(),
-            ctrlDown = false,
-            backtickKey = 192,
-            ctrlKey = 17,
-            cursorStart = $(this).prop('selectionStart'),
-            cursorFinish = $(this).prop('selectionEnd'),
-            end = (text.length - 5),
-            selectStart = null,
+        const text = $(this).val();
+        let ctrlDown = false;
+        const backtickKey = 192,
+            ctrlKey = 17;
+        let cursorStart = $(this).prop('selectionStart'),
+            cursorFinish = $(this).prop('selectionEnd');
+        const end = (text.length - 5);
+        let selectStart = null,
             selectEnd = null,
             i = 0;
 
@@ -118,14 +124,14 @@ chrome.runtime.sendMessage({JDTIfunction: 'getInputIDs'}, function (response) {
 });
 
 function selectNextSelectionRange (selector, cursorStart, tagStartIndex, tagEndIndex) {
-    var startPos = FindNextTI(cursorStart, tagStartIndex, tagEndIndex); // Find the starting <TI> tag
+    const startPos = FindNextTI(cursorStart, tagStartIndex, tagEndIndex); // Find the starting <TI> tag
     selector.setSelectionRange(startPos.start, startPos.end);
     return startPos;
 }
 
 // Helper method. Find next <TI> based on cursor position
 function FindNextTI (CursorPos, tagStart, tagEnd) {
-    for (var i = 0; i < tagStart.length; i++) {
+    for (let i = 0; i < tagStart.length; i++) {
         if (tagStart[i] >= CursorPos) {
             return { start: tagStart[i], end: tagEnd[i] };
         }
@@ -135,9 +141,9 @@ function FindNextTI (CursorPos, tagStart, tagEnd) {
 
 // Helper method. Find index(start and end) of all occurrences of a given substring in a string
 function getAllIndexes (str) {
-    var startIndexes = [],
-        endIndexes = [],
-        re = /<TI>/g, // Start
+    const startIndexes = [],
+        endIndexes = [];
+    let re = /<TI>/g, // Start
         match = re.exec(str);
     while (match) {
         startIndexes.push(match.index);
@@ -153,10 +159,35 @@ function getAllIndexes (str) {
     return { start: startIndexes, end: endIndexes };
 }
 
+function getAllSelectedLabels (element) {
+    const jelm = $(element.target);
+    selectedLabel = [];
+    jelm.find('.value-text').each(function (index, value) {
+        let text = value.innerText;
+        // if (labels.indexOf(text) >= 0) {
+        selectedLabel.push(text);
+        // }
+    });
+    // console.log('--------------- getAllSelectedLabels !!!');
+
+    let nowTime = new Date().getTime();
+    if (nowTime - lastProcessTime < 1000) {
+        return;
+    }
+    lastProcessTime = nowTime;
+
+    // console.log('--------------- injectDescriptionTemplate WHEN TAG CHANGED !!!');
+    injectDescriptionTemplate(lastDescriptionElement);
+}
+
 function isDefaultDescription (value, callback) {
+    // 强制都会刷新
+    if (new Date().getTime() > 0) {
+        callback(true);
+    }
     chrome.storage.sync.get(StorageID, function (templates) {
         templates = templates[StorageID].templates;
-        var match = false;
+        let match = false;
 
         // Check if it's empty.
         if (value === '') {
@@ -179,50 +210,86 @@ function isDefaultDescription (value, callback) {
 
 // Given the project name as formatted in JIRA's dropdown "PROJECT (KEY)", parse out the key
 function parseProjectKey (projectElement) {
-    var project = projectElement.val();
+    const project = projectElement.val();
     return project.substring(project.lastIndexOf('(') + 1, project.length - 1);
 }
 
+function isInArrayListContext (text, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].indexOf(text) >= 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function addExtracted (template, templateText) {
+// 添加额外的信息
+    let extraText = template['extra-text'];
+    if (extraText) {
+        for (let i = 0; i < extraText.length; i++) {
+            if (isInArrayListContext(extraText[i].label, selectedLabel)) {
+                // templateText += ('\n\n' + extraText[i].text);
+                templateText = extraText[i].text;
+            }
+        }
+    }
+    return templateText;
+}
+
 function injectDescriptionTemplate (descriptionElement) {
+    lastDescriptionElement = descriptionElement;
+    // console.log('--------------------- injectDescriptionTemplate');
+
     // Each issue type for each project can have its own template.
     chrome.storage.sync.get(StorageID, function (templates) {
         templates = templates[StorageID].templates;
-
-        var templateText = '',
-            projectElement = $('#project-field'),
+        let templateText = '';
+        const projectElement = $('#project-field'),
             issueTypeElement = $('#issuetype-field');
 
         if (issueTypeElement !== null && projectElement !== null) {
-            var projectKey = parseProjectKey(projectElement);
-            var override = 0;
+            const projectKey = parseProjectKey(projectElement);
+            let override = 0;
 
-            $.each(templates, function (key, template) {
+            for (const key in templates) {
+                let template = templates[key];
                 // Default template (no issue type, no project)
                 if (!template['issuetype-field'] && !template['projects-field']) {
                     if (override < 1) {
                         override = 1;
                         templateText = template.text;
+                        templateText = addExtracted(template, templateText);
+                        break;
                     }
-                // Override if project, no issue type
+                    // Override if project, no issue type
                 } else if (!template['issuetype-field'] && $.inArray(projectKey, utils.parseProjects(template['projects-field'])) !== -1) {
                     if (override < 2) {
                         override = 2;
                         templateText = template.text;
+                        templateText = addExtracted(template, templateText);
+                        break;
                     }
-                // Override if issue type, no project
+                    // Override if issue type, no project
                 } else if (!template['projects-field'] && template['issuetype-field'] === issueTypeElement.val()) {
                     if (override < 3) {
                         override = 3;
                         templateText = template.text;
+                        templateText = addExtracted(template, templateText);
+                        break;
                     }
-                // Override if issue type and project
+                    // Override if issue type and project
                 } else if (template['issuetype-field'] === issueTypeElement.val() &&
-                        $.inArray(projectKey, utils.parseProjects(template['projects-field'])) !== -1) {
+                    $.inArray(projectKey, utils.parseProjects(template['projects-field'])) !== -1) {
                     templateText = template.text;
-                    return false;
+                    templateText = addExtracted(template, templateText);
+                    // return false;
+                    break;
                 }
-            });
-
+            }
+            // $.each(templates, function (key, template) {
+            //
+            // });
             descriptionElement.value = templateText;
         } else {
             if (issueTypeElement === null) {
@@ -241,11 +308,27 @@ function descriptionChangeEvent (changeEvent) {
 }
 
 function observeDocumentBody (mutation) {
-    if (document.getElementById('create-issue-dialog') !== null || document.getElementById('create-subtask-dialog') !== null) { // Only interested in document changes related to Create Issue Dialog box or Create Sub-task Dialog box.
+    // console.log('observeDocumentBody');
+    labelObserver = null;
+
+    // console.log(mutation)
+    if (document.getElementById('create-issue-dialog') !== null || document.getElementById('create-subtask-dialog') !== null) {
+    // Only interested in document changes related to Create Issue Dialog box or Create Sub-task Dialog box.
         if (inputIDs.includes(mutation.target.id)) { // Only interested in select input id fields.
-            var descriptionElement = mutation.target;
+            const descriptionElement = mutation.target;
+            // console.log(mutation.target);
             isDefaultDescription(descriptionElement.value, function (result) {
-                if (result) { // Only inject if description field has not been modified by the user.
+                if (result) {
+                    // Only inject if description field has not been modified by the user.
+                    // console.log('--------------------- isDefaultDescription  = true');
+
+                    let nowTime = new Date().getTime();
+                    if (nowTime - lastProcessTime < 1000) {
+                        return;
+                    }
+                    lastProcessTime = nowTime;
+                    // console.log('--------------- injectDescriptionTemplate 22222222222222');
+
                     injectDescriptionTemplate(descriptionElement);
                     if (descriptionElement.className.indexOf('ajs-dirty-warning-exempt') === -1) { // Default template injection should not pop up dirtyDialogMessage.
                         descriptionElement.className += ' ajs-dirty-warning-exempt';
@@ -253,6 +336,14 @@ function observeDocumentBody (mutation) {
                     }
                 }
             });
+
+            if (!labelObserver && $('#labels-multi-select [role="listbox"]').length > 0) {
+                labelObserver = new MutationObserver(function (mutations) {
+                    mutations.forEach(getAllSelectedLabels);
+                });
+                const config = {attributes: false, childList: true, subtree: false};
+                labelObserver.observe($('#labels-multi-select [role="listbox"]')[0], config);
+            }
         }
     }
 }
@@ -260,9 +351,10 @@ function observeDocumentBody (mutation) {
 // Create observer to monitor for description field if the domain is a monitored one
 chrome.runtime.sendMessage({JDTIfunction: 'getDomains'}, function (response) {
     $.each(response.data, function (index, domain) {
-        var pattern = new RegExp(domain.name);
+        const pattern = new RegExp(domain.name);
         if (pattern.test(window.location.href)) {
-            var observer = new MutationObserver(function (mutations) {
+            // console.log('--------------------- test url = true');
+            const observer = new MutationObserver(function (mutations) {
                 mutations.forEach(observeDocumentBody);
             });
             observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['resolved'] });

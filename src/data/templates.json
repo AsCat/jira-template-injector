@@ -1,17 +1,39 @@
 {
-   "templates":[
-      {"name": "DEFAULT TEMPLATE", "issuetype-field":"", "projects-field": "", "text":""},
-      {"name": "BUG TEMPLATE", "issuetype-field":"Bug", "projects-field": "", "text":"*Summary*\n<TI>Enter summary of the problem here.</TI>\n\n*Steps to Reproduce*\n<TI>Enter detailed steps to reproduce here. More detail is better.</TI>\n\n*Expected Behaviour*\n<TI>Enter what should happen here.</TI>\n\n*Additional Details*\n<TI>Enter any other details such as examples, links to requirements, etc. Any criteria that might help with fixing the problem. Attach screenshots if possible. More detail is better.</TI>\n\n*Workaround*\n<TI>If there is a way to work around the problem, place that information here.</TI>"},
-      {"name": "STORY TEMPLATE", "issuetype-field":"Story", "projects-field": "", "text":"*Story*\nAs a <TI>type of user/persona</TI>, I want <TI>to perform some task</TI>, so that I can <TI>achieve some goal/benefit/value</TI>.\n\n*Details*\n<TI>Enter any details, clarifications, answers to questions, or points about implementation here.</TI>\n\n*Additional Information*\n<TI>Enter any background or references such as Stack Overflow, MSDN, blogs, etc. that may help with developing the feature.</TI>\n\n*Acceptance Criteria*\n<TI>Enter the conditions of satisfaction here. That is, the conditions that will satisfy the user/persona that the goal/benefit/value has been achieved.</TI>"},
-      {"name": "TASK TEMPLATE", "issuetype-field":"Task", "projects-field": "", "text":""},
-      {"name": "SUB TASK TEMPLATE", "issuetype-field":"Sub-task", "projects-field": "", "text":""},
-      {"name": "NEW FEATURE TEMPLATE", "issuetype-field":"New Feature", "projects-field": "", "text":"*Summary*\n<TI>Enter a summary of the New Feature here.</TI>\n\n*Details*\n<TI>Enter any details, clarifications, answers to questions, or points about implementation here.</TI>\n\n*Additional Information*\n<TI>Enter any background or references such as Stack Overflow, MSDN, blogs, etc. that may help with developing the feature.</TI>"},
-      {"name": "IMPROVEMENT TEMPLATE", "issuetype-field":"Improvement", "projects-field": "", "text":"*Summary*\n<TI>Enter a summary of the Improvement here.</TI>\n\n*Details*\n<TI>Enter any details, clarifications, answers to questions, or points about implementation here.</TI>\n\n*Additional Information*\n<TI>Enter any background or references such as Stack Overflow, MSDN, blogs, etc. that may help with developing the feature.</TI>"},
-      {"name": "EPIC TEMPLATE", "issuetype-field":"Epic", "projects-field": "", "text":"*Epic*\nAs a <TI>type of user/persona</TI>, I want <TI>to perform some task</TI>, so that I can <TI>achieve some goal/benefit/value</TI>.\n\n*Details*\n<TI>Enter any details, clarifications, answers to questions, and points about implementation here.</TI>"}
-   ],
-   "options":{
-     "limit": [],
-     "domains":[],
-     "inputIDs":[]
-   }
+  "templates": [
+    {
+      "name": "缺陷模板",
+      "issuetype-field": "缺陷",
+      "projects-field": "",
+      "text": "*(*) Commit提交记录*\n<TI>Fix：#jira单号 </TI>\n\n*(y) 改进措施*\n<TI>主要写入为何线下不能发现的原因，以及后续如何改进，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 问题产生原因*\n<TI>bug原有字段，必填，样例见：http://jira.netease.com/browse/CLDNSF-2534 </TI>\n\n*(/) 解决方案*\n<TI> bug原有字段，必填,样例见: http://jira.netease.com/browse/CLDNSF-2534 </TI>"
+    },
+    {
+      "name": "任务模板",
+      "issuetype-field": "任务",
+      "projects-field": "",
+      "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>",
+      "extra-text": [
+        {
+          "label": "开发自测-不输出用例",
+          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(/) 回归用例集合*\n<TI>给出回归的用例集合（选择原有用例），需要给出执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>"
+        },
+        {
+          "label": "开发自测-输出用例",
+          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
+        },
+        {
+          "label": "开发自测-输出用例+自动化",
+          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(flag) 自动化*\n<TI>列出已经自动化的casename，或自动化链接，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
+        },
+        {
+          "label": "QA测试",
+          "text": "*(i) 测试版本*\n<TI>列出提测测试版本镜像</TI>\n\n*(*g) 评审集合*\n<TI> 必填</TI>\n\n*(on) 冒烟集合*\n<TI> 必填</TI>\n\n*(/) 执行集合*\n<TI> 如果需要输出用例的task，该项必填；不需要输出的该项非必填</TI>\n\n*(*y) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好</TI>\n\n*(flag) 自动化*\n<TI>需要输出自动化的必填，否则为非必填</TI>"
+        }
+      ]
+    }
+  ],
+  "options": {
+    "limit": [],
+    "domains": [],
+    "inputIDs": []
+  }
 }
