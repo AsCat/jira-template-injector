@@ -6,11 +6,13 @@
 const StorageID = 'Jira-Template-Injector';
 const inputIDs = [];
 let labelObserver = null;
-let selectedType = null;
 let selectedLabel = [];
 let lastDescriptionElement = null;
-// const labels = ['QA测试', '开发自测-输出用例', '开发自测-输出用例+自动化', '开发自测-不输出用例'];
 let lastProcessTime = 0;
+let clickTabTimeout = null;
+
+const labelTips = '<div id="labelTips" class="description" style="color: #1222f7;">JIRA助手提示：推荐的标签为【QA测试】,【开发自测-不输出用例】，【开发自测-输出用例】，<br/>【开发自测-输出用例+自动化】这4种，不要忘记括号~</div>';
+const emptyLabelTips = '<div id="emptyLabelTips" style="color:#fd0606;" class="description">这位同学，你确定不加个标签吗？</div>';
 
 let browserType = 'Chrome'; // eslint-disable-line no-unused-vars
 if (navigator.userAgent.indexOf('Firefox') !== -1 || navigator.userAgent.indexOf('Edge') !== -1) {
@@ -123,6 +125,20 @@ chrome.runtime.sendMessage({JDTIfunction: 'getInputIDs'}, function (response) {
     });
 });
 
+function addLabTips () {
+    if ($('#labelTips').length <= 0) {
+        $('#labels').after(labelTips);
+    }
+}
+
+function checkEmptyLabTips () {
+    if (selectedLabel && checkEmptyLabTips.length > 0) {
+
+    } else {
+
+    }
+}
+
 function selectNextSelectionRange (selector, cursorStart, tagStartIndex, tagEndIndex) {
     const startPos = FindNextTI(cursorStart, tagStartIndex, tagEndIndex); // Find the starting <TI> tag
     selector.setSelectionRange(startPos.start, startPos.end);
@@ -224,20 +240,35 @@ function isInArrayListContext (text, array) {
 }
 
 function addExtracted (template, templateText) {
-// 添加额外的信息
+    // 添加额外的信息
     let extraText = template['extra-text'];
+    // console.log(templateText);
+    // console.log('ddddddddddddddd');
+    // console.log(extraText);
+    let labelIsEmpty = true;
     if (extraText) {
         for (let i = 0; i < extraText.length; i++) {
             if (isInArrayListContext(extraText[i].label, selectedLabel)) {
                 // templateText += ('\n\n' + extraText[i].text);
                 templateText = extraText[i].text;
+                labelIsEmpty = false;
             }
         }
+    }
+    if (labelIsEmpty) {
+        if ($('#emptyLabelTips').length <= 0) {
+            $('.buttons-container.form-footer').append(emptyLabelTips);
+        }
+    } else {
+        $('#emptyLabelTips').remove();
     }
     return templateText;
 }
 
 function injectDescriptionTemplate (descriptionElement) {
+    addLabTips();
+    checkEmptyLabTips();
+    // console.log(descriptionElement)
     lastDescriptionElement = descriptionElement;
     // console.log('--------------------- injectDescriptionTemplate');
 
@@ -307,17 +338,65 @@ function descriptionChangeEvent (changeEvent) {
     changeEvent.target.removeEventListener('change', descriptionChangeEvent);
 }
 
+function eventFire (el, etype) {
+    if (el.fireEvent) {
+        el.fireEvent('on' + etype);
+    } else {
+        const evObj = document.createEvent('Events');
+        evObj.initEvent(etype, true, false);
+        el.dispatchEvent(evObj);
+    }
+}
+
+function clickIfNotInTextMode () {
+    // console.log('-------------1 clickIfNotInTextMode');
+    let sourceTabElement = $('*[data-mode="source"]');
+    if (sourceTabElement && sourceTabElement.length > 0) {
+        let liId = sourceTabElement.children('a').attr('id');
+        // console.log(liId);
+        // console.log('-------------2 clickIfNotInTextMode');
+        const selected = $('#' + liId).attr('aria-selected');
+        if (selected === 'false') {
+            // console.log('------clickIfNotInTextMode');
+            if (clickTabTimeout) {
+                clearTimeout(clickTabTimeout);
+            }
+            clickTabTimeout = setTimeout(function () {
+                // console.log('clicked');
+                eventFire(document.getElementById(liId), 'click');
+                const desc = document.getElementById('description');
+                injectDescriptionTemplate(desc);
+
+                listenForTagChanged();
+            }, 500);
+        }
+    }
+}
+
+function listenForTagChanged () {
+    if (!labelObserver && $('#labels-multi-select [role="listbox"]').length > 0) {
+        // console.log('00000000000000');
+        labelObserver = new MutationObserver(function (mutations) {
+            mutations.forEach(getAllSelectedLabels);
+        });
+        const config = {attributes: false, childList: true, subtree: false};
+        labelObserver.observe($('#labels-multi-select [role="listbox"]')[0], config);
+    }
+}
+
 function observeDocumentBody (mutation) {
     // console.log('observeDocumentBody');
     labelObserver = null;
 
     // console.log(mutation)
     if (document.getElementById('create-issue-dialog') !== null || document.getElementById('create-subtask-dialog') !== null) {
-    // Only interested in document changes related to Create Issue Dialog box or Create Sub-task Dialog box.
+        clickIfNotInTextMode();
+        // Only interested in document changes related to Create Issue Dialog box or Create Sub-task Dialog box.
         if (inputIDs.includes(mutation.target.id)) { // Only interested in select input id fields.
             const descriptionElement = mutation.target;
             // console.log(mutation.target);
             isDefaultDescription(descriptionElement.value, function (result) {
+                // console.log('-=---------- isDefaultDescription');
                 if (result) {
                     // Only inject if description field has not been modified by the user.
                     // console.log('--------------------- isDefaultDescription  = true');
@@ -337,13 +416,7 @@ function observeDocumentBody (mutation) {
                 }
             });
 
-            if (!labelObserver && $('#labels-multi-select [role="listbox"]').length > 0) {
-                labelObserver = new MutationObserver(function (mutations) {
-                    mutations.forEach(getAllSelectedLabels);
-                });
-                const config = {attributes: false, childList: true, subtree: false};
-                labelObserver.observe($('#labels-multi-select [role="listbox"]')[0], config);
-            }
+            listenForTagChanged();
         }
     }
 }
