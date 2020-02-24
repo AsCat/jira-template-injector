@@ -595,10 +595,11 @@ function getNextID (templates) {
 // This file will load the default templates into storage on install or update if no previous versions are already loaded.
 chrome.storage.sync.get(StorageID, function (templates) {
     // Check if we have any loaded templates in storage.
-    if (Object.keys(templates).length === 0 && JSON.stringify(templates) === JSON.stringify({})) {
+     // if (Object.keys(templates).length === 0 && JSON.stringify(templates) === JSON.stringify({})) {
         // No data in storage yet - Load default templates.
-        setDefaultTemplates(function (status, result) {});
-    }
+    // force update
+    setDefaultTemplates(function (status, result) {});
+    // }
 });
 
 function reloadMatchingTabs () {

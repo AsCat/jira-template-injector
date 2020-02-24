@@ -4,29 +4,44 @@
       "name": "缺陷模板",
       "issuetype-field": "缺陷",
       "projects-field": "",
-      "text": "*(*) Commit提交记录*\n<TI>Fix：#jira单号 </TI>\n\n*(y) 改进措施*\n<TI>主要写入为何线下不能发现的原因，以及后续如何改进，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 问题产生原因*\n<TI>bug原有字段，必填，样例见：http://jira.netease.com/browse/CLDNSF-2534 </TI>\n\n*(/) 解决方案*\n<TI> bug原有字段，必填,样例见: http://jira.netease.com/browse/CLDNSF-2534 </TI>"
-    },
+      "text": " *(?) 案发现场描述*\n <TI>说明测试环境、操作步骤、错误结果</TI>\n\n *(/) 预期正确结果*\n <TI>说明该场景下的正确结果</TI>" },
     {
       "name": "任务模板",
       "issuetype-field": "任务",
       "projects-field": "",
-      "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>",
+      "text": "*(*) Commit提交记录*\n<TI>如果没有关联，请手动填写</TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>",
       "extra-text": [
         {
           "label": "开发自测-不输出用例",
-          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(/) 回归用例集合*\n<TI>给出回归的用例集合（选择原有用例），需要给出执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>"
+          "text": "*(*) Commit提交记录*\n<TI>如果没有关联，请手动填写 </TI>\n\n*(off)自测执行时间：*\n<TI>填写用例自测执行时间</TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(?) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(/) 回归用例集合*\n<TI>给出回归的用例集合（选择原有用例），需要给出执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>"
         },
         {
           "label": "开发自测-输出用例",
-          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
+          "text": "*(*) Commit提交记录*\n<TI>如果没有关联，请手动填写 </TI>\n\n*(off)自测执行时间：*\n<TI>填写用例自测执行时间</TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
         },
         {
           "label": "开发自测-输出用例+自动化",
-          "text": "*(*) Commit提交记录*\n<TI>Enhance：#jira单号 </TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(flag) 自动化*\n<TI>列出已经自动化的casename，或自动化链接，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
+          "text": "*(*) Commit提交记录*\n<TI>如果没有关联，请手动填写 </TI>\n\n*(off)自测执行时间：*\n<TI>填写用例自测执行时间</TI>\n\n*(on) 设计方案/修改点*\n<TI>工作量，大于3d的需要输出设计方案。比较小的修改列出修改点，样例见：http://jira.netease.com/browse/CLDNSF-2535，整体规范见：http://doc.hz.netease.com/pages/viewpage.action?pageId=195912311</TI>\n\n*(!) 影响范围*\n<TI>给出该任务合入版本后的影响范围，样例见：http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(?) 评审集合*\n<TI> 给出新增用例的评审集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(/) 执行集合*\n<TI> 给出新增用例+功能影响点的老用例的执行集合，tc平台如何使用见链接：https://g.hz.netease.com/CloudQA/DevTestDes/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ</TI>\n\n*(*r) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>\n\n*(flag) 自动化*\n<TI>列出已经自动化的casename，或自动化链接，样例见http://jira.netease.com/browse/CLDNSF-2535</TI>"
         },
         {
           "label": "QA测试",
           "text": "*(i) 测试版本*\n<TI>列出提测测试版本镜像</TI>\n\n*(*g) 评审集合*\n<TI> 必填</TI>\n\n*(on) 冒烟集合*\n<TI> 必填</TI>\n\n*(/) 执行集合*\n<TI> 如果需要输出用例的task，该项必填；不需要输出的该项非必填</TI>\n\n*(*y) 版本质量*\n<TI> 需要自测的合入版本的必填，通过测试过程需要给出该任务合入后测试的结论，比如测试通过，无问题，或修复几个问题等，越详细越好</TI>\n\n*(flag) 自动化*\n<TI>需要输出自动化的必填，否则为非必填</TI>"
+        },
+        {
+          "label": "专项测试",
+          "text": "*(i) 测试版本&环境*\n<TI>列出专项测试的版本及环境，必填</TI>\n\n*(*g) 测试方案，必须进行会议评审*\n<TI> 方案链接，必填；（是/否）完成会议评审</TI>\n\n*(on) 测试时长*\n<TI>\n测试周期：X月X号~X月X号\n测试投入人力：*d\n</TI>\n\n*(/) 测试报告*\n<TI> 报告链接，必填</TI>\n\n*(*y) 测试问题和结论*\n<TI> 测试过程中问题记录以及最终简要结论</TI>\n\n*(flag) 自动化*\n<TI>专项测试涉及到的自动化脚本等，非必填</TI>"
+        },
+        {
+          "label": "方案调研",
+          "text": "*(i) 背景*\n<TI>列出调研背景，比如针对**客户**场景的技术支持</TI>\n\n*(*g) 调研方案输出*\n<TI> 方案链接或备注调研结论，必填</TI>"
+        },
+        {
+          "label": "临时任务",
+          "text": "*(*) 开发时间*\n<TI>任务开发时间 </TI>\n\n*(on) 测试时间*\n<TI>任务测试时间</TI>\n"
+        },
+        {
+          "label": "交付验收",
+          "text": ""
         }
       ]
     }

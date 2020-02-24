@@ -11,7 +11,7 @@ let lastDescriptionElement = null;
 let lastProcessTime = 0;
 let clickTabTimeout = null;
 
-const labelTips = '<div id="labelTips" class="description" style="color: #1222f7;">JIRA助手提示：推荐的标签为【QA测试】,【开发自测-不输出用例】，【开发自测-输出用例】，<br/>【开发自测-输出用例+自动化】这4种，不要忘记括号~</div>';
+const labelTips = '<div id="labelTips" class="description" style="color: #1222f7;">JIRA助手提示：推荐的标签为【QA测试】,【开发自测-不输出用例】，【开发自测-输出用例】，<br/>【开发自测-输出用例+自动化】，【专项测试】，【方案调研】，【临时任务】,【交付验收】这8种，不要忘记括号~</div>';
 const emptyLabelTips = '<div id="emptyLabelTips" style="color:#fd0606;" class="description">这位同学，你确定不加个标签吗？</div>';
 
 let browserType = 'Chrome'; // eslint-disable-line no-unused-vars
@@ -36,7 +36,7 @@ chrome.runtime.sendMessage({JDTIfunction: 'getInputIDs'}, function (response) {
         const text = $(this).val();
         let ctrlDown = false;
         const backtickKey = 192,
-            ctrlKey = 17;
+            ctrlKey = 17; // 17; 切换为left shit
         let cursorStart = $(this).prop('selectionStart'),
             cursorFinish = $(this).prop('selectionEnd');
         const end = (text.length - 5);
@@ -94,6 +94,7 @@ chrome.runtime.sendMessage({JDTIfunction: 'getInputIDs'}, function (response) {
         // Keypress listener
         $(`#${inputID.currentTarget.id}`).keydown(function (e) {
             if (ctrlDown && (e.keyCode === backtickKey)) { // If ctrl is pressed
+                // if (e.keyCode === 9) {
                 let {start: tagStartIndex, end: tagEndIndex} = getAllIndexes($(this).val()); // Find all <TI> and </TI> tags in selected template.
                 if (tagStartIndex.length !== 0 && tagEndIndex.length !== 0) { // Works only if the selected template contains any <TI> tag
                     if (selectStart === null && selectEnd === null) { // Start from first <TI>
@@ -149,10 +150,10 @@ function selectNextSelectionRange (selector, cursorStart, tagStartIndex, tagEndI
 function FindNextTI (CursorPos, tagStart, tagEnd) {
     for (let i = 0; i < tagStart.length; i++) {
         if (tagStart[i] >= CursorPos) {
-            return { start: tagStart[i], end: tagEnd[i] };
+            return {start: tagStart[i], end: tagEnd[i]};
         }
     }
-    return { start: tagStart[0], end: tagEnd[0] };
+    return {start: tagStart[0], end: tagEnd[0]};
 }
 
 // Helper method. Find index(start and end) of all occurrences of a given substring in a string
@@ -172,7 +173,7 @@ function getAllIndexes (str) {
         endIndexes.push(match.index + 5);
         match = re.exec(str);
     }
-    return { start: startIndexes, end: endIndexes };
+    return {start: startIndexes, end: endIndexes};
 }
 
 function getAllSelectedLabels (element) {
@@ -430,7 +431,7 @@ chrome.runtime.sendMessage({JDTIfunction: 'getDomains'}, function (response) {
             const observer = new MutationObserver(function (mutations) {
                 mutations.forEach(observeDocumentBody);
             });
-            observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['resolved'] });
+            observer.observe(document.body, {subtree: true, attributes: true, attributeFilter: ['resolved']});
         }
     });
 });
